@@ -1,0 +1,52 @@
+/*******************************************\
+	BOB EFFECT
+---------------------------------------------
+	Element moves backwards and forwards
+	@include MG-bob([animation name], [axis], [bob distance]);
+\*******************************************/
+
+$bobDefault-distance: 3px !default;
+
+@function bob_generator($axis, $value){
+	@return
+		(transform: unquote('translate#{to-upper-case($axis)}(0)')),
+		(transform: unquote('translate#{to-upper-case($axis)}(#{$value})')),
+		(transform: unquote('translate#{to-upper-case($axis)}(0)')),
+	;
+}
+
+$bobs:
+	bob--up Y -$bobDefault-distance,
+	bob--down Y $bobDefault-distance,
+	bob--left X -$bobDefault-distance,
+	bob--right X $bobDefault-distance
+;
+
+@each $bob in $bobs {
+	$name: nth($bob, 1);
+	$axis: nth($bob, 2);
+	$value: nth($bob, 3);
+
+	@include kf-definition($name, bob_generator($axis, $value));
+}
+
+////////////// use this /////////////////////
+
+@mixin bob($instanceName: left, $settings: 1s, $loops:infinite, $axis: X, $value: $bobDefault-distance){
+
+	$defaultBob: false;
+
+	@each $bob in $bobs {
+		$bobName: nth($bob, 1);
+		@if($bobName == 'bob--#{$instanceName}'){
+			@if (($axis!=X) and ($value != $bobDefault-distance)){
+				@error "Do not use 'up', 'down', 'left' or 'right' as the first argument if setting custom values for '$axis' '$value' (the first argument is used as the animation name)";
+			}
+			$defaultBob: true;
+			@include kf-predefined($bobName,$settings,$loops);
+		}
+	}
+	@if ($defaultBob == false){
+		@include kf-animate('bob--#{$instanceName}', bob_generator($axis, $value), $settings, $loops);
+	}
+}
