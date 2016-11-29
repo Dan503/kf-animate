@@ -1,0 +1,30 @@
+/*******************************************\
+	PULSE EFFECT
+---------------------------------------------
+	Element periodically grows slightly and
+	then shrinks again like a heart beat.
+\*******************************************/
+
+@function pulse_generator($scale, $stop1: 30%, $stop2: 50%){
+	@return
+		0% (scale: 1),
+		$stop1 (scale: $scale),
+		$stop2 (scale: 1),
+		100% (scale: 1)
+	;
+}
+
+$pulse: pulse_generator(1.1);
+
+@include kf-definition(pulse,$pulse);
+
+//////////////// Use the following //////////////////////////
+
+//mixin for custom functionality
+@mixin pulse($timing: 1s, $loops:infinite, $name: pulse, $scale:1.1, $stop1: 30%, $stop2: 50%){
+	@if ($name == pulse){
+		@include kf-predefined(pulse,$timing,$loops);
+	} @else {
+		@include kf-animate($name, pulse_generator($scale, $stop1, $stop2), $timing, $loops);
+	}
+}
