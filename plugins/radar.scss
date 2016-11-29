@@ -1,0 +1,45 @@
+/*******************************************\
+	RADAR EFFECT
+---------------------------------------------
+	Element fades out as it grows then snaps back into position
+	This can create a pulsing radar effect if used right
+\*******************************************/
+
+$radarDefault-scale: 1.4 !default;
+//the lower the percentage the smaller the delay between pulses
+$radarDefault-delay: 50% !default;
+
+//switches it so the higher the number, the smaller the delay
+$radarDefault-delay--flipped: 100% - $radarDefault-delay;
+
+@function radarPulse_generator($scale: $radarDefault-scale, $delayStop: $radarDefault-delay--flipped){
+	$timeline: ();
+	@if ($delayStop == 100%){
+		$timeline:
+			0% ( scale: 1, opacity: 1),
+			100% ( scale: $scale, opacity: 0),
+		;
+	} @else {
+		$timeline:
+			0% ( scale: 1, opacity: 1),
+			$delayStop ( scale: $scale, opacity: 0),
+			100% ( scale: $scale, opacity: 0),
+		;
+
+	}
+	@return $timeline;
+}
+
+$radarPulse: radarPulse_generator();
+
+@include kf-definition(radar,$radarPulse);
+
+//////////////// Use the following //////////////////////////
+
+@mixin radar($timing: 2s, $loops:infinite, $name: radar, $scale: $radarDefault-scale,  $delayStop: $radarDefault-delay--flipped){
+	@if ($name == radar){
+		@include kf-predefined($name, $timing, $loops);
+	} @else {
+		@include kf-animate($name, radarPulse_generator($scale, $delayStop), $timing, $loops);
+	}
+}
