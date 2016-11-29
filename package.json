@@ -1,0 +1,24 @@
+{
+  "name": "kf-animate",
+  "version": "1.0.0",
+  "description": "A powerful sass mixin for generating keyframe css animations",
+  "main": "kf-animate.scss",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dan503/kf-animate.git"
+  },
+  "keywords": [
+    "sass",
+    "scss",
+    "mixin",
+    "animation",
+    "animate",
+    "keyframes"
+  ],
+  "author": "Daniel Tonon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dan503/kf-animate/issues"
+  },
+  "homepage": "https://github.com/Dan503/kf-animate#readme"
+}
