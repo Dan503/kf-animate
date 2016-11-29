@@ -5,7 +5,10 @@
 	then shrinks again like a heart beat.
 \*******************************************/
 
-@function pulse_generator($scale, $stop1: 30%, $stop2: 50%){
+$pulseDefault-stop1: 30% !default;
+$pulseDefault-stop2: 50% !default;
+
+@function pulse_generator($scale, $stop1: $pulseDefault-stop1, $stop2: $pulseDefault-stop2){
 	@return
 		0% (scale: 1),
 		$stop1 (scale: $scale),
@@ -21,7 +24,7 @@ $pulse: pulse_generator(1.1);
 //////////////// Use the following //////////////////////////
 
 //mixin for custom functionality
-@mixin pulse($timing: 1s, $loops:infinite, $name: pulse, $scale:1.1, $stop1: 30%, $stop2: 50%){
+@mixin pulse($timing: 1s, $loops:infinite, $name: pulse, $scale:1.1, $stop1: $pulseDefault-stop1, $stop2: $pulseDefault-stop2){
 	@if ($name == pulse){
 		@include kf-predefined(pulse,$timing,$loops);
 	} @else {
