@@ -8,6 +8,11 @@ A powerful sass mixin for generating keyframe css animations
 * [Auto generated keyframes](#auto-generated-keyframes)
 * [Animation settings](#animation-settings)
 * [Predefined keyframe animations](#predefined-keyframe-animations)
+* [Pre-built animation plugins](#pre-built-animation-plugins)
+  * [bob](#bob)
+  * [pulse](#pulse)
+  * [radar](#radar)
+  * [spin](#spin)
 
 ##Installation
 
@@ -165,3 +170,82 @@ The variables for `kf-predefined` are the same as `kf-animate` except without th
 
 @include kf-predefined($name, $timing: 1s, $loops: infinite, $ease: linear, $fill: both);
 ```````````````````````
+
+##Pre-built animation plugins
+
+To use one of these plugins, you need to load them in seperately after the core kf-animate mixin
+
+The plugin install snippets have this format
+
+``````````scss
+//100% optional default settings
+$pluginDefault-setting: value;
+
+//required imports for plugin
+@import '../node_modules/kf-animate/kf-animate';
+@import '../node_modules/kf-animate/plugins/plugin.scss';
+``````````
+
+###bob
+
+``````````scss
+$bobDefault-distance: 3px;
+$bobDefault-direction: right;
+$bobDefault-timing: 1s;
+$bobDefault-loops: infinite;
+$bobDefault-axis: X;
+
+@import '../node_modules/kf-animate/kf-animate';
+@import '../node_modules/kf-animate/plugins/bob.scss';
+``````````
+
+###pulse
+
+``````````scss
+$pulseDefault-stop1: 30%;
+$pulseDefault-stop2: 50%;
+$pulseDefault-timing: 1s;
+$pulseDefault-scale: 1.1;
+$pulseDefault-name: pulse;
+$pulseDefault-loops: infinite;
+
+@import '../node_modules/kf-animate/kf-animate';
+@import '../node_modules/kf-animate/plugins/pulse.scss';
+``````````
+
+
+###radar
+
+``````````scss
+$radarDefault-scale: 1.4;
+$radarDefault-delay: 50%;
+$radarDefault-timing: 2s;
+$radarDefault-name: radar;
+$radarDefault-loops: infinite;
+
+@import '../node_modules/kf-animate/kf-animate';
+@import '../node_modules/kf-animate/plugins/bob.scss';
+``````````
+
+###rumble
+
+``````````scss
+$rumbleDefault-rotation: 5deg;
+$rumbleDefault-timing: 0.5s;
+$rumbleDefault-name: rumble;
+$rumbleDefault-loops: infinite;
+
+@import '../node_modules/kf-animate/kf-animate';
+@import '../node_modules/kf-animate/plugins/radar.scss';
+``````````
+
+###spin
+
+``````````scss
+$spinDefault-direction: clockwise;
+$spinDefault-timing: 1s;
+$spinDefault-loops: infinite;
+
+@import '../node_modules/kf-animate/kf-animate';
+@import '../node_modules/kf-animate/plugins/spin.scss';
+``````````
