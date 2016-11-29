@@ -3,6 +3,10 @@
 ---------------------------------------------
 	Element spins around in one spot
 \*******************************************/
+$spinDefault-direction: clockwise !default;
+$spinDefault-timing: 1s !default;
+$spinDefault-loops: infinite !default;
+
 $spin--clockwise:
 	(rotate: 0),
 	(rotate: 360deg)
@@ -19,6 +23,6 @@ $spin--anticlockwise:
 //////////////// Use the following //////////////////////////
 
 //mixin for custom functionality (changes how fast it spins)
-@mixin spin($direction: clockwise, $timing: 1s, $loops: infinite){
+@mixin spin($direction: $spinDefault-direction, $timing: $spinDefault-timing, $loops: $spinDefault-loops){
 	@include kf-predefined(spin--#{$direction}, $timing, $loops, linear);
 }

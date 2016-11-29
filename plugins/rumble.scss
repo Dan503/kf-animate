@@ -4,7 +4,10 @@
 	Element jitteres from side to side
 \*******************************************/
 
-$rumbleDefault: 5deg !default;
+$rumbleDefault-rotation: 5deg !default;
+$rumbleDefault-timing: 0.5s !default;
+$rumbleDefault-name: rumble !default;
+$rumbleDefault-loops: infinite !default;
 
 @function rumble_generator($rotation){
 	@return
@@ -17,9 +20,9 @@ $rumbleDefault: 5deg !default;
 	;
 }
 
-$rumble: rumble_generator($rumbleDefault);
+$rumble: rumble_generator($rumbleDefault-rotation);
 
-@include kf-definition( rumble, $rumble );
+@include kf-definition( $rumbleDefault-name, $rumble );
 
 //////////////// Use the following //////////////////////////
 
@@ -29,9 +32,9 @@ $rumble: rumble_generator($rumbleDefault);
 //This would rumble the element 5 degrees either side for 1 second, but only once
 //if changing the rotation distance, then a unique animation name is required
 
-@mixin rumble($timing: 0.5s, $loops:infinite, $name: rumble, $rotation: $rumbleDefault){
-	@if ($name == rumble){
-		@include kf-predefined(rumble, $timing, $loops);
+@mixin rumble($timing: $rumbleDefault-timing, $loops: $rumbleDefault-loops, $name: $rumbleDefault-name, $rotation: $rumbleDefault-rotation){
+	@if ($name == $rumbleDefault-name){
+		@include kf-predefined($name, $timing, $loops);
 	} @else {
 		@include kf-animate($name, kf_generator(rumble_generator($rotation)), $settings, $loops);
 	}

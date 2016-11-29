@@ -6,6 +6,10 @@
 \*******************************************/
 
 $bobDefault-distance: 3px !default;
+$bobDefault-direction: right !default;
+$bobDefault-timing: 1s !default;
+$bobDefault-loops: infinite !default;
+$bobDefault-axis: X !default;
 
 @function bob_generator($axis, $value){
 	@return
@@ -32,21 +36,21 @@ $bobs:
 
 ////////////// use this /////////////////////
 
-@mixin bob($instanceName: left, $settings: 1s, $loops:infinite, $axis: X, $value: $bobDefault-distance){
+@mixin bob($instanceName: $bobDefault-direction, $timing: $bobDefault-timing, $loops: $bobDefault-loops, $axis: $bobDefault-axis, $value: $bobDefault-distance){
 
 	$defaultBob: false;
 
 	@each $bob in $bobs {
 		$bobName: nth($bob, 1);
 		@if($bobName == 'bob--#{$instanceName}'){
-			@if (($axis!=X) and ($value != $bobDefault-distance)){
+			@if (($axis!=$bobDefault-axis) and ($value != $bobDefault-distance)){
 				@error "Do not use 'up', 'down', 'left' or 'right' as the first argument if setting custom values for '$axis' '$value' (the first argument is used as the animation name)";
 			}
 			$defaultBob: true;
-			@include kf-predefined($bobName,$settings,$loops);
+			@include kf-predefined($bobName, $timing, $loops);
 		}
 	}
 	@if ($defaultBob == false){
-		@include kf-animate('bob--#{$instanceName}', bob_generator($axis, $value), $settings, $loops);
+		@include kf-animate('bob--#{$instanceName}', bob_generator($axis, $value), $timing, $loops);
 	}
 }

@@ -7,6 +7,10 @@
 
 $pulseDefault-stop1: 30% !default;
 $pulseDefault-stop2: 50% !default;
+$pulseDefault-timing: 1s !default;
+$pulseDefault-scale: 1.1 !default;
+$pulseDefault-name: pulse !default;
+$pulseDefault-loops: infinite !default;
 
 @function pulse_generator($scale, $stop1: $pulseDefault-stop1, $stop2: $pulseDefault-stop2){
 	@return
@@ -17,16 +21,16 @@ $pulseDefault-stop2: 50% !default;
 	;
 }
 
-$pulse: pulse_generator(1.1);
+$pulse: pulse_generator($pulseDefault-scale);
 
-@include kf-definition(pulse,$pulse);
+@include kf-definition($pulseDefault-name, $pulse);
 
 //////////////// Use the following //////////////////////////
 
 //mixin for custom functionality
-@mixin pulse($timing: 1s, $loops:infinite, $name: pulse, $scale:1.1, $stop1: $pulseDefault-stop1, $stop2: $pulseDefault-stop2){
-	@if ($name == pulse){
-		@include kf-predefined(pulse,$timing,$loops);
+@mixin pulse($timing: $pulseDefault-timing, $loops: $pulseDefault-loops, $name: $pulseDefault-name, $scale: $pulseDefault-scale, $stop1: $pulseDefault-stop1, $stop2: $pulseDefault-stop2){
+	@if ($name == $pulseDefault-name){
+		@include kf-predefined($name, $timing, $loops);
 	} @else {
 		@include kf-animate($name, pulse_generator($scale, $stop1, $stop2), $timing, $loops);
 	}

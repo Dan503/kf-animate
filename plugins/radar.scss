@@ -8,6 +8,9 @@
 $radarDefault-scale: 1.4 !default;
 //the lower the percentage the smaller the delay between pulses
 $radarDefault-delay: 50% !default;
+$radarDefault-timing: 2s !default;
+$radarDefault-name: radar !default;
+$radarDefault-loops: infinite !default;
 
 //switches it so the higher the number, the smaller the delay
 $radarDefault-delay--flipped: 100% - $radarDefault-delay;
@@ -32,12 +35,12 @@ $radarDefault-delay--flipped: 100% - $radarDefault-delay;
 
 $radarPulse: radarPulse_generator();
 
-@include kf-definition(radar,$radarPulse);
+@include kf-definition($radarDefault-name, $radarPulse);
 
 //////////////// Use the following //////////////////////////
 
-@mixin radar($timing: 2s, $loops:infinite, $name: radar, $scale: $radarDefault-scale,  $delayStop: $radarDefault-delay--flipped){
-	@if ($name == radar){
+@mixin radar($timing: $radarDefault-timing, $loops: $radarDefault-loops, $name: $radarDefault-name, $scale: $radarDefault-scale,  $delayStop: $radarDefault-delay--flipped){
+	@if ($name == $radarDefault-name){
 		@include kf-predefined($name, $timing, $loops);
 	} @else {
 		@include kf-animate($name, radarPulse_generator($scale, $delayStop), $timing, $loops);
