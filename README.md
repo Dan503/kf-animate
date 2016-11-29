@@ -155,7 +155,7 @@ Ok, now for another scenario. What if we want to apply the same effect to a rang
     animation: fadeInOut 1s infinite linear both;
 }
 .parent__child--anim2 {
-    animation: fadeInOut 2s infinite linear both;
+    animation: fadeInOut 1s 0.5s infinite linear both;
 }
 ```````````````````````
 
