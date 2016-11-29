@@ -1,0 +1,24 @@
+/*******************************************\
+	SPIN EFFECT
+---------------------------------------------
+	Element spins around in one spot
+\*******************************************/
+$spin--clockwise:
+	(rotate: 0),
+	(rotate: 360deg)
+;
+$spin--anticlockwise:
+	(rotate: 360deg),
+	(rotate: 0)
+;
+
+@include kf-definition(spin--clockwise, $spin--clockwise);
+@include kf-definition(spin--anticlockwise, $spin--anticlockwise);
+
+
+//////////////// Use the following //////////////////////////
+
+//mixin for custom functionality (changes how fast it spins)
+@mixin spin($direction: clockwise, $timing: 1s, $loops: infinite){
+	@include kf-predefined(spin--#{$direction}, $timing, $loops, linear);
+}
