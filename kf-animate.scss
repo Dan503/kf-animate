@@ -1,0 +1,52 @@
+///////////////////////////////
+//	Keyframe animations		//
+/////////////////////////////
+
+@import 'helpers/kf-animation-loop';
+
+//Sets up the key-frames for the animation
+//Use this on it's own to set up an animation that is shared across multiple elements or multiple timings
+@mixin kf-definition($animation_name, $animation_set) {
+	@at-root(without: all) {
+		@keyframes #{$animation_name} {
+			@include kf-animation-loop($animation_set);
+		}
+	}
+}
+
+//Defines how the animation plays out
+//use this on it's own to call on animations made with the kf-definition mixin
+//This mixin allows you to use the same animation set as another element but give different timings
+@mixin kf-predefined($animation_name, $timing: 1s, $loops: infinite, $ease: linear, $fill: both){
+	animation: $animation_name $timing $loops $ease $fill;
+}
+
+//Ties all the key-frame animation mixins together into a single easy to use mixin
+@mixin kf-animate($animation_name, $animation_set, $timing: 1s, $loops: infinite, $ease: linear, $fill: both) {
+	@include kf-definition($animation_name, $animation_set);
+	@include kf-predefined($animation_name, $timing, $loops, $ease, $fill);
+}
+
+//EXAMPLE USAGE:
+
+//$example_animation:
+//	0% (
+//		scale: 0,
+//		opacity: 0
+//	),
+//	80% (
+//		scale: 1,
+//		opacity: 1
+//	),
+//	100% (
+//		scale: 0,
+//		opacity: 0
+//	)
+//;
+
+//#element {
+//	@include kf-animate(example_animation, $example_animation, 3s);
+//}
+
+
+

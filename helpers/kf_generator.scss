@@ -1,0 +1,22 @@
+
+@import 'kf_keyframe_percent';
+
+//generates evenly spaced key frames for an animation set
+@function kf_generator($animation_set){
+
+	$animation:	(0% (nth($animation_set, 1))),;
+
+	@for $i from 2 through (length($animation_set)) {
+			$animation_keyframe:
+					///*determines at what point in the animation the attributes take effect*/
+				(kf_keyframe_percent($i, $animation_set)
+
+				///*adds the attributes to the keyframe*/
+				nth($animation_set, $i))
+			;
+
+			$animation: append($animation, $animation_keyframe, comma);
+	}
+	//@debug $animation; //uncomment if having issues with the generator*/
+	@return ($animation);
+}
