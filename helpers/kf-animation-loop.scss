@@ -1,0 +1,30 @@
+
+@import 'kf_generator';
+
+//analyses the animation set and generates the css rules for each key frame
+@mixin kf-animation-loop ($animation_set){
+
+		@if (type-of(nth($animation_set,1)) == 'map'){
+			$animation_set: kf_generator($animation_set);
+		}
+
+		@each $frame in $animation_set {
+			$keyframe: nth($frame,1);
+			$css: nth($frame,2);
+
+		 	#{$keyframe} {
+		 		@each $attribute, $value in $css {
+					@if ($attribute == rotate){
+						transform: rotate($value);
+					} @else if ($attribute == 3D-rotate){
+						transform: rotate#{nth($value,2)}(nth($value,1));
+						transform-style: preserve-3d;
+					} @else if ($attribute == scale) {
+						transform: scale($value);
+					} @else {
+						#{$attribute} : $value;
+					}
+		 		}
+			}
+		}
+};

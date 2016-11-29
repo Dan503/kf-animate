@@ -1,0 +1,4 @@
+//calculates the percentages for the key frame generator
+@function kf_keyframe_percent($index, $attribute_list){
+	@return (100% / (length($attribute_list) - 1)) * ($index - 1);
+}
