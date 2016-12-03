@@ -12,7 +12,7 @@ A powerful sass mixin for generating keyframe css animations
 ##Installation
 
 ```````
-npm install kf-animate --save-dev
+npm install kf-animate --save
 ```````
 
 Then in your main scss file (making sure the path is correct)
