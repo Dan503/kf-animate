@@ -1,6 +1,6 @@
 {
   "name": "kf-animate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A powerful sass mixin for generating keyframe css animations",
   "main": "kf-animate.scss",
   "repository": {
