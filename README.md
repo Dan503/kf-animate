@@ -27,7 +27,7 @@ I also recommend using [Autoprefixer](https://github.com/postcss/autoprefixer) i
 
 Here is an example of how to do a simple animation of something fading in and out continuously (also the text is changing color).
 
-`````````````SCSS
+``````SCSS
 //A simple SASS keyframe animation
 .element {
     $fadeInOut:
@@ -37,8 +37,9 @@ Here is an example of how to do a simple animation of something fading in and ou
     ;
     @include kf-animate(fadeInOut, $fadeInOut);
 }
-```````````````````````
-```````````````````````CSS
+``````
+
+``````CSS
 /*CSS output*/
 @keyframes fadeInOut {
     0% { opacity: 0; color: red; }
@@ -48,7 +49,7 @@ Here is an example of how to do a simple animation of something fading in and ou
 .element {
     animation: fadeInOut 1s infinite linear both;
 }
-```````````````````````
+``````
 
 ##Auto generated keyframes
 
@@ -67,8 +68,9 @@ Well guess what! kf-animate is able to take away all that pain and figure out th
     ;
     @include kf-animate(fadeInOut, $fadeInOut);
 }
-```````````````````````
-```````````````````````CSS
+`````````````
+
+`````````````CSS
 /*CSS output*/
 @keyframes fadeInOut {
     0% { opacity: 0; color: red; }
@@ -78,7 +80,7 @@ Well guess what! kf-animate is able to take away all that pain and figure out th
 .element {
     animation: fadeInOut 1s infinite linear both;
 }
-```````````````````````
+`````````````
 
 ##Animation settings
 
@@ -100,7 +102,7 @@ If you want to maybe have a slow fade in while the background changes colors, yo
     ;
     @include kf-animate(fadeInOut, $fadeInOut, 1s, 1);
 }
-```````````````````````
+`````````````
 
 If you are wondering what that `1` at the end is, it's the number of loops the animation will play for. Most of the time you will want this to be either `1` or `infinite`, it defaults to infinite.
 
@@ -108,7 +110,7 @@ This is the order that the kf-animate attributes go in and their default setting
 
 `````````````SCSS
 @include kf-animate($name, $keyframes, $timing: 1s, $loops: infinite, $ease: linear, $fill: both)
-```````````````````````
+`````````````
 
 `$timing` is used for both duration and delay. Duration is always the first value and if you add a second value to the `$timing` variable it will be the delay.
 
@@ -138,8 +140,9 @@ Ok, now for another scenario. What if we want to apply the same effect to a rang
         }
     }
 }
-```````````````````````
-```````````````````````CSS
+`````````````
+
+`````````````CSS
 /*CSS output*/
 @keyframes fadeInOut {
     0% { opacity: 0; }
@@ -152,7 +155,7 @@ Ok, now for another scenario. What if we want to apply the same effect to a rang
 .parent__child--anim2 {
     animation: fadeInOut 1s 0.5s infinite linear both;
 }
-```````````````````````
+`````````````
 
 The variables for `kf-definition` are simply the animation name, followed by the animation set.
 
@@ -164,4 +167,4 @@ The variables for `kf-predefined` are the same as `kf-animate` except without th
 @include kf-definition($name, $keyframes);
 
 @include kf-predefined($name, $timing: 1s, $loops: infinite, $ease: linear, $fill: both);
-```````````````````````
+`````````````
